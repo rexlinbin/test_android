@@ -1,9 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+     signingConfigs{
+        release {
+           keyAlias "androiddebugkey"
+           keyPassword "android"
+           storeFile file("debug.keystore")
+           storePassword "android"
+        }
+     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.test.test"
+        applicationId "com.lengyue.test"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
@@ -14,6 +22,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
     buildToolsVersion '27.0.1'
