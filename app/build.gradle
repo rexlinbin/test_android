@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "findbugs"
 
 android {
      signingConfigs{
@@ -38,4 +39,32 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+task findbugs(type: FindBugs) {
+
+    //toolVersion = "3.0.1"
+
+    ignoreFailures= true
+
+    effort= "max"
+
+    reportLevel= "low"
+
+    classes = files("$project.buildDir/intermediates/classes")
+
+    source= fileTree('build/intermediates/classes/debug/com/sn/')
+
+    classpath= files()
+
+    reports{
+
+        xml {
+
+            destination "build/findbugs.xml"
+
+            }
+
+    }
+
 }
