@@ -1,4 +1,4 @@
-package com.test.test;
+package com.lengyue.test;
 
 import org.junit.Test;
 

@@ -1,0 +1,6 @@
+**/R.class
+**/R$*.class
+**/*$ViewInjector*.*
+**/*$ViewBinder*.*
+**/BuildConfig.*
+**/Manifest*.*

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: "findbugs"
+apply plugin: "jacoco"
 
 android {
      signingConfigs{
@@ -27,6 +28,7 @@ android {
         }
         debug {
             signingConfig signingConfigs.release
+            testCoverageEnabled true
         }
     }
     buildToolsVersion '27.0.1'
@@ -67,4 +69,31 @@ task findbugs(type: FindBugs) {
 
     }
 
+}
+
+task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    buildDir =  "$projectDir/build" // Location of the build directory for the build Variant
+
+    def coverageSourceDirs = [
+            "src/main/java"
+    ]
+    File file = new File("$projectDir/unitTestFilter.txt")
+    def fileFilter = file.readLines()
+    def javaClasses = fileTree(//修改此处路径为编译输出的的class路径
+            dir: "$buildDir/intermediates/classes/debug",
+            excludes: fileFilter
+    )
+
+    classDirectories = files([ javaClasses ])
+    additionalSourceDirs = files(coverageSourceDirs)
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+    ])
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }

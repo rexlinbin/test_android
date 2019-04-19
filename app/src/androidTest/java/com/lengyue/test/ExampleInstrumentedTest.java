@@ -1,4 +1,4 @@
-package com.test.test;
+package com.lengyue.test;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.test.test", appContext.getPackageName());
+        assertEquals("com.lengyue.test", appContext.getPackageName());
     }
 }
