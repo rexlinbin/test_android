@@ -4,3 +4,5 @@
 **/*$ViewBinder*.*
 **/BuildConfig.*
 **/Manifest*.*
+android/*
+androidx/*
